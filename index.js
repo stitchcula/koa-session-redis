@@ -49,6 +49,10 @@ module.exports = function (opts) {
     redisOption.host,
     redisOption.options
   );
+  
+  if(redisOption.auth) client.auth(redisOption.auth,function(err){
+    if(err)debug('redis auth falsed');
+  })
 
   client.select(redisOption.db, function () {
     debug('redis changed to db %d', redisOption.db);
